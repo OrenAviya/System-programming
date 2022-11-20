@@ -1,7 +1,3 @@
-//
-// Created by aviya on 11/17/22.
-//
-
 #ifndef MATALA1_NUMCLASS_H
 #define MATALA1_NUMCLASS_H
 

@@ -1,7 +1,3 @@
-//
-// Created by aviya on 11/17/22.
-//
-
 #include "NumClass.h"
 #include "math.h"
 #include <stdlib.h>
