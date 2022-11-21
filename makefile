@@ -5,13 +5,13 @@ clean:
 	rm -rf *.so
 
 mains: main.c recursives
-	gcc main.c -L. -lclassrec -lm -o mains
+	gcc main.c -L. -lclassrec -o mains
 
 maindloop: main.c loopd
-	gcc -Wall main.c -L. -lclassloops -lm -o maindloop
+	gcc -Wall main.c -L. -lclassloops -o maindloop
 
 maindrec: main.c recursived
-	gcc -Wall main.c -L. -lclassrec -lm -o maindrec
+	gcc -Wall main.c -L. -lclassrec -o maindrec
 
 loops:advancedClassificationLoop.o basicClassification.o
 	ar -rc libclassloops.a advancedClassificationLoop.o basicClassification.o
@@ -24,7 +24,8 @@ recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
-	gcc -shared -Wall advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
+
+	gcc -shared -Wall , advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 basicClassification.o:basicClassification.c NumClass.h

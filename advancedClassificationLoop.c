@@ -36,7 +36,8 @@ int isPalindrome(int x){
     }
     int isP = 1;
     for(int j = 0; (j <= len/2) && (isP == 1) ; j++){
-        if(charArray[j] != charArray[len - j -1])
+
+       if(charArray[j] != charArray[len - j -1])
             isP = 0;
     }
     return isP;
