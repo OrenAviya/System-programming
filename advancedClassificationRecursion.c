@@ -23,10 +23,12 @@ int isPalindrome(int x){
     int len = (int) ( floor( log10( abs(x) )+1 ) );
     int firstDigit = x/( (int)(pow(10,len-1)) );
     int lastD = x % 10;
-    if(firstDigit != lastD)
+    if(firstDigit != lastD) {
         return 0;
-    if(len == 0)
+    }
+    if(len == 1) {
         return 1;
+    }
     x = x / 10;
     x = x % ( (int)(pow(10,len-1)) );
     return isPalindrome(x);

@@ -3,27 +3,38 @@ all: maindrec maindloop loops mains
 clean:
 	rm -rf *.o
 	rm -rf *.so
+	rm -rf *.a
+	rm maindloop
+	rm mains
+	rm maindrec
+loopd:libclassloops.so
 
-mains: main.c recursives
-	gcc main.c -L. -lclassrec -lm -o mains
+loops:libclassloops.a
 
-maindloop: main.c loopd
-	gcc -Wall main.c -L. -lclassloops -lm -o maindloop
+recursived:libclassrec.so
 
-maindrec: main.c recursived
-	gcc -Wall main.c -L. -lclassrec -lm -o maindrec
+recursives:libclassrec.a
 
-loops:advancedClassificationLoop.o basicClassification.o
+mains: main.o libclassrec.a
+	gcc main.o ./libclassrec.a -lm -o mains
+
+maindloop: main.o libclassloops.so
+	gcc -Wall main.o ./libclassloops.so -lm -o maindloop
+
+maindrec: main.o libclassrec.so
+	gcc -Wall main.o ./libclassrec.so -lm -o maindrec
+
+libclassloops.a:advancedClassificationLoop.o basicClassification.o
 	ar -rc libclassloops.a advancedClassificationLoop.o basicClassification.o
 
-recursives:advancedClassificationRecursion.o basicClassification.o
+libclassrec.a:advancedClassificationRecursion.o basicClassification.o
 	ar -rc libclassrec.a advancedClassificationRecursionPIC.o basicClassification.o
 
-recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
+libclassrec.so:basicClassificationPIC.o advancedClassificationRecursionPIC.o
 	gcc -shared -Wall basicClassificationPIC.o advancedClassificationRecursionPIC.o  -o libclassrec.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
-loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
+libclassloops.so:advancedClassificationLoopPIC.o basicClassificationPIC.o
 	gcc -shared -Wall advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
@@ -44,3 +55,8 @@ advancedClassificationRecursionPIC.o:advancedClassificationRecursion.c NumClass.
 
 advancedClassificationLoopPIC.o:advancedClassificationLoop.c NumClass.h
 	gcc -c -Wall -Werror -fpic advancedClassificationLoop.c -o advancedClassificationLoopPIC.o
+
+main.o: main.c NumClass.h
+	gcc -c main.c -o main.o
+
+.PHONEY:all clean loopd loops recursives recursived
