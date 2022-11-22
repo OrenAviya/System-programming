@@ -19,11 +19,16 @@ int isStrong(int num){
         return 0;
 }
 
-/* will return if a number is prime*/
+/* will return if a number is prime
+* 1 consist prime for now
+*
+*/
 int isPrime(int n){
-    for (int i=2 ; i< sqrt(n)+1 ; i= i+1){
-        if (n%i == 0 )
+
+    for (int i=2  ; i <= n/2 ; i= i+1){
+        if (n%i == 0 ){
             return 0;
+        }      
     }
     return 1;
 }
