@@ -15,7 +15,7 @@ int main() {
     int armstrongsInx = 0;
     int palindromesInx = 0;
     int strongsInx = 0;
-    for(int i = start; i <= end;)
+    for(int i = start; i <= end; i = i+1)
     {
         if (isStrong(i) == 1) {
             strongs[strongsInx] = i;
@@ -39,17 +39,17 @@ int main() {
     {
         printf(" %d", armstrongs[i]);
     }
-    printf("The Palindromes numbers are:");
+    printf("\nThe Palindromes numbers are:");
     for(int i = 0; i <palindromesInx; i = i + 1)
     {
         printf(" %d", palindromes[i]);
     }
-    printf("The Prime numbers are:");
+    printf("\nThe Prime numbers are:");
     for(int i = 0; i < primesInx; i = i + 1)
     {
         printf(" %d", primes[i]);
     }
-    printf("The Strong numbers are:");
+    printf("\nThe Strong numbers are:\n");
     for(int i = 0; i < strongsInx; i = i + 1)
     {
         printf(" %d", strongs[i]);
